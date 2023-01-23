@@ -104,3 +104,51 @@ const data = [
   },
 ]
 
+// Select all the class need 
+const gameScreen = document.querySelector( ".game")
+const resultScreen = document.querySelector(".result")
+const question = document.querySelector( ".question")
+const answerContainer = document.querySelector(".answer")
+const submitQuestion = document.querySelector(".submit")
+const playAgain = document.querySelector(".play")
+
+
+
+// Declare All the Variables for the game
+
+let gameIndex = 0
+let correctAnswer = 0
+let totalScore = 0
+let wrongAnswer = 0
+let selectdAnswer
+
+
+// creat function to show the question
+
+const displayQuestion = (qNumber) => {
+  question.textContent = data[qNumber].question;
+  answerContainer.innerHTML = data[qNumber].answers.map((item, index) => 
+  `
+  <div class="answer">
+      <input name="answer" type="radio" id=${index} value=${item.isCorrect}>
+      <label for="1">${item.answer}</label>
+    </div>
+
+  `
+  ).join("");
+}
+
+
+// creat function to choose the options
+
+const selectdAnswers = () => {
+  answerContainer.querySelectorAll("input").forEach(el => {
+    el.addEventListener('click', (e) => {
+      selectdAnswer = e.target.value
+    })
+  })
+} 
+
+
+
+displayQuestion(gameIndex)
