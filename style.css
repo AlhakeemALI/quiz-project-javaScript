@@ -13,8 +13,7 @@ object-fit: cover;
   height:500px;
   background-color: #fff;
   position: relative;
-  
-  
+  box-shadow: 8px 4px 4px #fff;
 }
 
 .content {
