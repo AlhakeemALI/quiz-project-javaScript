@@ -120,12 +120,43 @@ let gameIndex = 0
 let correctAnswer = 0
 let totalScore = 0
 let wrongAnswer = 0
-let selectdAnswer
+let selectedAnswer
 
+
+// creat function to play again
+
+const letPlay = () => {
+   gameIndex = 0
+   correctAnswer = 0
+   totalScore = 0
+   wrongAnswer = 0
+displayQuestion(gameIndex)
+}
+
+playAgain.addEventListener("click", () => {
+  
+  letPlay()
+  resultScreen.style.display = "none"
+  gameScreen.style.display = "block"
+})
+
+// creat function to show the result
+
+const showResultPage = () => {
+  resultScreen.style.display = "block"
+  gameScreen.style.display = "none"
+
+  resultScreen.querySelector(".correct").textContent = `Correct Answers: ${correctAnswer}`
+  resultScreen.querySelector(".wrong").textContent = `Wrong Answers: ${wrongAnswer}`
+  resultScreen.querySelector(".score").textContent = `Score: ${(correctAnswer - wrongAnswer) * 10}`
+  
+}
 
 // creat function to show the question
 
 const displayQuestion = (qNumber) => {
+  if(qNumber === data.length) return showResultPage()
+  selectedAnswer = null
   question.textContent = data[qNumber].question;
   answerContainer.innerHTML = data[qNumber].answers.map((item, index) => 
   `
@@ -136,19 +167,34 @@ const displayQuestion = (qNumber) => {
 
   `
   ).join("");
+
+  mySelectedAnswers()
 }
 
 
 // creat function to choose the options
 
-const selectdAnswers = () => {
+const mySelectedAnswers = () => {
   answerContainer.querySelectorAll("input").forEach(el => {
     el.addEventListener('click', (e) => {
-      selectdAnswer = e.target.value
+      selectedAnswer = e.target.value
     })
   })
 } 
 
+// creat function to submit Answer
+
+const submitAnswer = () => {
+  submitQuestion.addEventListener("click", () => {
+    if(selectedAnswer !== null) {
+      selectedAnswer === 'true' ? correctAnswer++ : wrongAnswer++
+     gameIndex++
+     displayQuestion(gameIndex)
+    } else alert("Select an asnser!")
+  })
+}
+
 
 
 displayQuestion(gameIndex)
+submitAnswer()
