@@ -148,7 +148,7 @@ const showResultPage = () => {
 
   resultScreen.querySelector(".correct").textContent = `Correct Answers: ${correctAnswer}`
   resultScreen.querySelector(".wrong").textContent = `Wrong Answers: ${wrongAnswer}`
-  resultScreen.querySelector(".score").textContent = `Score: ${(correctAnswer - wrongAnswer) * 10}`
+  resultScreen.querySelector(".score").textContent = `Score: ${(correctAnswer) * 10}`
   
 }
 
